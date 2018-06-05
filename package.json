@@ -1,0 +1,16 @@
+{
+  "name": "@rappopo/cuk-bootstrap",
+  "version": "0.0.1",
+  "description": "Bootstrap 4 skin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3"
+  }
+}
