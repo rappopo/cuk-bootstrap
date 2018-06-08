@@ -1,4 +1,6 @@
 {
-  "fluidContainer": false,
-  "useCdn": true
+  "common": {
+    "fluidContainer": false,
+    "useCdn": true
+  }
 }
