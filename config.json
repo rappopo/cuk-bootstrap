@@ -1,5 +1,6 @@
 {
   "common": {
+    "skinName": "Bootstrap",
     "fluidContainer": false,
     "useCdn": true
   }
