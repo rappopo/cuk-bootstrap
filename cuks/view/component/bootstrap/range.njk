@@ -1,0 +1,10 @@
+<input name="{{ params.name }}" type="range" class="
+  {% if params.custom %}custom-range{% else %}form-control-range{% endif %}
+  {% if params.cls %}{{ params.cls }}{% endif %}"
+  {% if params.id %}id="{{ params.id }}"{% endif %}
+  {% if params.hintId %}aria-describedby="{{ params.hintId }}"{% endif %}
+  {% if params.readOnly %}readonly{% endif %}
+  {% if params.value %}value="{{ params.value }}"{% endif %}
+  {% if params.attr %}{{ params.attr }}{% endif %}
+  {{ cmpt('dataAttr', params.data) }}
+>

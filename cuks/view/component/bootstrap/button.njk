@@ -1,0 +1,32 @@
+{% if not params.context %}
+{% set params = helper('core:merge')(params, { context: 'primary' }) %}
+{% endif %}
+{% if params.tag == 'a' %}
+<a href="{% if params.href|safe %}{{ params.href }}{% else %}#{% endif %}"
+  {% if not params.href %}role="button"{% endif %} class="btn
+  {% if params.cls %}{{ params.cls }}{% endif %}
+  {% if params.context %}btn{% if params.outline %}-outline{% endif %}-{{ params.context }}{% endif %}
+  {% if params.textSize %}btn-{{ params.textSize }}{% endif %}
+  {% if params.block %}btn-block{% endif %}
+  {% if params.active %}active{% endif %}
+  {% if params.disabled %}disabled{% endif %}"
+  {% if params.id %}id="{{ params.id }}"{% endif %}
+  {% if params.disabled %}tabindex="-1" aria-disabled="true"{% endif %}
+  {% if params.active %}aria-pressed="true"{% endif %}
+  {% if params.attr %}{{ params.attr|safe }}{% endif %}
+  {{ cmpt('dataAttr', params.data) }}
+>{{ params.title }}</button>
+{% else %}
+<button type="button" class="btn
+  {% if params.cls %}{{ params.cls }}{% endif %}
+  {% if params.context %}btn{% if params.outline %}-outline{% endif %}-{{ params.context }}{% endif %}
+  {% if params.textSize %}btn-{{ params.textSize }}{% endif %}
+  {% if params.block %}btn-block{% endif %}
+  {% if params.active %}active{% endif %}"
+  {% if params.id %}id="{{ params.id }}"{% endif %}
+  {% if params.disabled %}disabled{% endif %}
+  {% if params.active %}aria-pressed="true"{% endif %}
+  {% if params.attr %}{{ params.attr|safe }}{% endif %}
+  {{ cmpt('dataAttr', params.data) }}
+>{{ params.title }}</button>
+{% endif %}

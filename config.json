@@ -2,6 +2,8 @@
   "common": {
     "skinName": "Bootstrap",
     "fluidContainer": false,
-    "useCdn": true
+    "useCdn": false,
+    "navbar": "fixed-top navbar-dark bg-primary",
+    "themes": []
   }
 }

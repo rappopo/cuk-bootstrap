@@ -1,0 +1,29 @@
+{% if params.wrapper %}
+<div class="container
+  {% if params.wrapperFullWidth %}pl-0 pr-0{% endif %}
+  {% if params.wrapperCls %}{{ params.wrapperCls }}{% endif %}">
+{% endif %}
+{% for row in params.rows %}
+  {% set row = row if _.isPlainObject(row) else { cols: row } %}
+  <div class="row
+  {% if row.noGutter %}no-gutters{% endif %}
+  {% if row.valign %}align-items-{{ row.valign }}{% endif %}
+  {% if row.align %}justify-content-{{ row.align }}{% endif %}
+  {% if row.cls %}{{ row.cls }}{% endif %}">
+  {% for col in row.cols %}
+    {% set col = col if _.isPlainObject(col) else { content: col } %}
+    {% if col.break %}
+      <div class="w-100
+      {% if col.cls %}{{ col.cls }}{% endif %}"></div>
+    {% else %}
+      <div class="col{% if col.width %}-{{ col.width }}{% endif %}
+      {% if col.order %}order-{{ col.order }}{% endif %}
+      {% if col.offset %}offset-{{ col.offset }}{% endif %}
+      {% if col.cls %}{{ col.cls }}{% endif %}">{{ col.content }}</div>
+    {% endif %}
+  {% endfor %}
+  </div>
+{% endfor %}
+{% if params.wrapper %}
+</div>
+{% endif %}

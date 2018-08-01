@@ -1,0 +1,20 @@
+{% for i in ['name', 'value', 'readOnly', 'custom', 'choose', 'values', 'textSize', 'rows', 'multiple', 'disabled', 'inputId', 'inputCls'] %}
+  {% if params[i] %}
+    {% set params = _.merge(params, { input: _.set({}, i, params[i]) }) %}
+  {% endif %}
+{% endfor %}
+{% if params.labelCls %}
+  {% set params = _.merge(params, { label: { cls: params.labelCls } }) %}
+{% endif %}
+{% if params.hintCss %}
+  {% set params = _.merge(params, { hint: { cls: params.hintCss } }) %}
+{% endif %}
+{% if _.isString(params.label) %}
+  {% set params = _.merge(params, { label: { text: params.label } }) %}
+{% endif %}
+{% if _.isString(params.hint) %}
+  {% set params = _.merge(params, { hint: { text: params.hint } }) %}
+{% endif %}
+{{
+  cmpt('formGroup', _.merge(params, { input: { baseCmpt: 'select' } }))
+}}

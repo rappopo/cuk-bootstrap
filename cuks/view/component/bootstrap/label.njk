@@ -1,0 +1,5 @@
+<label {% if params.for %}for="{{ params.for }}"{% endif %} class="
+  {% if params.cls %}{{ params.cls }}{% endif %}"
+  {% if params.attr %}{{ params.attr }}{% endif %}
+  {{ cmpt('dataAttr', params.data) }}
+>{{ params.text }}</label>

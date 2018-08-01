@@ -1,0 +1,19 @@
+<nav aria-label="breadcrumb"
+  {% if params.id %}id="{{ params.id }}"{% endif %}
+  {{ cmpt('dataAttr', params.data) }}
+>
+  <ol class="breadcrumb {% if params.wrapperCls %}{{ params.wrapperCls }}{% endif %}">
+  {% for i in params.items %}
+    <li class="breadcrumb-item{% if i.active %} active{% endif %}
+      {% if params.cls %}{{ params.cls }}{% endif %}"
+      {% if i.active %} aria-current="page"{% endif %}
+    >
+      {% if i.href %}
+      <a href="{{ i.href }}">{{ i.text }}</a>
+      {% else %}
+      {{ i.text }}
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ol>
+</nav>
