@@ -1,4 +1,7 @@
-<input name="{{ params.name }}" type="file" class="form-control-file
+{% if params.custom %}
+<div class="custom-file">
+{% endif %}
+<input name="{{ params.name }}" type="file" class="{% if params.custom %}custom-file-input{% else %}form-control-file{% endif %}
   {% if params.cls %}{{ params.cls }}{% endif %}
   {% if params.textSize %}form-control-{{ params.textSize }}{% endif %}"
   {% if params.id %}id="{{ params.id }}"{% endif %}
@@ -9,3 +12,20 @@
   {% if params.attr %}{{ params.attr }}{% endif %}
   {{ cmpt('dataAttr', params.data) }}
 >
+{% if params.custom %}
+  <label class="custom-file-label" {% if params.id %}for="{{ params.id }}"{% endif %}>{{ params.placeHolder }}</label>
+</div>
+{% if params.custom and params.name and (not noChangePlaceHolder) %}
+<script>
+$(function(){
+  $("input[type=file][name={{ params.name }}]").change(function () {
+    var fieldVal = $(this).val();
+    fieldVal = fieldVal.replace("C:\\fakepath\\", "")
+    if (fieldVal != undefined || fieldVal != "") {
+      $(this).next(".custom-file-label").text(fieldVal)
+    }
+  })
+})
+</script>
+{% endif %}
+{% endif %}

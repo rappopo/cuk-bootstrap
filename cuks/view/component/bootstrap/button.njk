@@ -1,5 +1,5 @@
 {% if not params.context %}
-{% set params = helper('core:merge')(params, { context: 'primary' }) %}
+{% set params = _.merge(params, { context: 'primary' }) %}
 {% endif %}
 {% if params.tag == 'a' %}
 <a href="{% if params.href|safe %}{{ params.href }}{% else %}#{% endif %}"

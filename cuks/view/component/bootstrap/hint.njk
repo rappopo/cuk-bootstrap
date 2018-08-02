@@ -1,5 +1,5 @@
 <small {% if params.id %}id="{{ params.id }}"{% endif %} class="form-text text-muted
   {% if params.cls %}{{ params.cls }}{% endif %}"
-  {% if params.attr %}{{ params.attr|safe }}{% endif %}
+  {% if params.attr %}{{ params.attr }}{% endif %}
   {{ cmpt('dataAttr', params.data) }}
 >{{ params.text }}</small>

@@ -1,0 +1,82 @@
+{% macro addons(pos) %}
+  {% for b in pos %}
+    {% if _.isString(b) %}{% set b = { type: 'text', text: b } %}{% endif %}
+    {% if b.type == 'radio' %}
+      <div class="input-group-text">
+        <input type="radio"
+          {% if b.checked %}checked{% endif %}
+          {% if b.id %}id="{{ b.id }}"{% endif %}
+          {% if b.ariaLabel %}id="{{ b.ariaLabel }}"{% endif %}
+          {% if b.attr %}{{ b.attr }}{% endif %}
+          {{ cmpt('dataAttr', b.data) }}
+        >
+      </div>
+    {% elif b.type == 'checkbox' %}
+      <div class="input-group-text">
+        <input type="checkbox"
+          {% if b.checked %}checked{% endif %}
+          {% if b.id %}id="{{ b.id }}"{% endif %}
+          {% if b.ariaLabel %}id="{{ b.ariaLabel }}"{% endif %}
+          {% if b.attr %}{{ b.attr }}{% endif %}
+          {{ cmpt('dataAttr', b.data) }}
+        >
+      </div>
+    {% elif b.type == 'button' %}
+      {% set b = _.omit(b, ['block', 'active', 'tag']) %}
+      {{ cmpt('button', b) }}
+    {% elif b.type == 'dropdown' %}
+      {% set b = _.omit(b, ['block', 'active', 'tag']) %}
+      {{ cmpt('dropdown', _.merge(b, { noWrapper: true })) }}
+    {% else %}
+      <span class="input-group-text">{{ b.text }}</span>
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+<div class="input-group
+  {% if params.textSize %}input-group-{{ params.textSize }}{% endif %}
+  {% if params.cls %}{{ params.cls }}{% endif %}"
+  {% if params.id %}id="{{ params.id }}"{% endif %}
+  {% if params.attr %}{{ params.attr }}{% endif %}
+  {{ cmpt('dataAttr', params.data) }}
+>
+  {% if params.before %}
+    <div class="input-group-prepend
+      {% if params.before.type == 'dropdown' and params.before.dir %}drop{{ params.before.dir }}{% endif %}
+    ">
+    {% if not _.isArray(params.before) %}
+    {% set params = _.merge(params, { before: [params.before] }) %}
+    {% endif %}
+      {{ addons(params.before) }}
+    </div>
+  {% endif %}
+
+  {% for i in ['name', 'value', 'values', 'readOnly', 'placeHolder', 'type', 'disabled', 'inputId', 'inputCls'] %}
+    {% if params[i] %}
+      {% set params = _.merge(params, { input: _.set({}, i, params[i]) }) %}
+    {% endif %}
+  {% endfor %}
+  {% if not _.isArray(params.input) %}
+    {% set params = _.merge(params, { input: [params.input] }) %}
+  {% endif %}
+  {% for i in params.input %}
+    {% if i.type == 'select' %}
+      {{ cmpt('select', _.merge(i, { custom: true })) }}
+    {% elif i.type == 'file' %}
+      {{ cmpt('file', _.merge(i, { custom: true })) }}
+    {% else %}
+      {{ cmpt('text', i) }}
+    {% endif %}
+  {% endfor %}
+
+  {% if params.after %}
+    <div class="input-group-append
+      {% if params.after.type == 'dropdown' and params.after.dir %}drop{{ params.after.dir }}{% endif %}"
+    >
+    {% if not _.isArray(params.after) %}
+    {% set params = _.merge(params, { after: [params.after] }) %}
+    {% endif %}
+      {{ addons(params.after) }}
+    </div>
+  {% endif %}
+</div>

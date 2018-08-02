@@ -1,4 +1,4 @@
-{% for i in ['name', 'value', 'readOnly', 'textSize', 'disabled', 'inputId', 'inputCls'] %}
+{% for i in ['name', 'value', 'custom', 'readOnly', 'textSize', 'disabled', 'inputId', 'inputCls', 'placeHolder'] %}
   {% if params[i] %}
     {% set params = _.merge(params, { input: _.set({}, i, params[i]) }) %}
   {% endif %}
@@ -16,5 +16,5 @@
   {% set params = _.merge(params, { hint: { text: params.hint } }) %}
 {% endif %}
 {{
-  cmpt('formGroup', _.merge(params, { input: { baseCmpt: 'file' } }))
+  cmpt('formGroup', _.merge(params, { baseCmpt: 'file' }))
 }}

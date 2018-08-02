@@ -18,14 +18,16 @@
 {% endmacro %}
 
 {% if not params.context %}
-{% set params = helper('core:merge')(params, { context: 'primary' }) %}
+{% set params = _.merge(params, { context: 'primary' }) %}
 {% endif %}
+{% if not params.noWrapper %}
 <div class="dropdown {{ params.wrapperCls }}
   {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.split %}btn-group{% endif %}
   {% if params.dir %}drop{{ params.dir }}{% endif %}"
   {{ cmpt('dataAttr', params.data) }}
 >
+{% endif %}
   {% if params.split %}
   <button type="button" class="btn
     {% if params.context %}btn{% if params.outline %}-outline{% endif %}-{{ params.context }}{% endif %}"
@@ -59,4 +61,6 @@
       {{ buildMenu(params.menu) }}
     {% endif %}
   </div>
+{% if not params.noWrapper %}
 </div>
+{% endif %}

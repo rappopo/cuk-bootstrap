@@ -1,0 +1,19 @@
+{% if params.custom and not params.id %}
+{% set params = _.merge(params, { custom: false }) %}
+{% endif %}
+<div class="{% if params.custom %}custom-control custom-radio{% else %}form-check{% endif %}
+  {% if params.inline %}{{ 'custom-control-inline' if params.custom else 'form-check-inline' }}{% endif %}"
+>
+  {% set params = _.omit(params, ['plainText', 'type', 'textSize', 'placeHolder', 'hintId', 'readOnly']) %}
+  {% set checked = ' checked' if params.checked else '' %}
+  {% set ariaLabel = '' if params.label else ' aria-label="..."' %}
+  {% set attr = params.attr|d('') + checked + ariaLabel %}
+  {% set cls = '' if params.label else ' position-static' %}
+  {% set dcls = 'custom-control-input' if params.custom else 'form-check-input' %}
+  {% set params = _.merge(params, { type: 'radio', cls: cls + ' ' + dcls, attr: attr }) %}
+  {{ cmpt('text', params) }}
+  {% if params.label %}
+    {% set cls = 'custom-control-label' if params.custom else 'form-check-label' %}
+    <label class="{{ cls }}" {% if params.id %}for="{{ params.id }}"{% endif %}>{{ params.label }}</label>
+  {% endif %}
+</div>

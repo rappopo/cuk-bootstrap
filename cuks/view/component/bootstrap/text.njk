@@ -1,7 +1,15 @@
-<input name="{{ params.name }}" type="{{ params.type|d('text') }}" class="
+{% set type = params.type|d('text') %}
+{% if params.plainText %}
+{% set dcss = 'form-control-plaintext' %}
+{% elif type == 'radio' or type == 'checkbox' %}
+{% set dcss = '' %}
+{% else %}
+{% set dcss = 'form-control' %}
+{% endif %}
+<input name="{{ params.name }}" type="{{ type }}" class="
   {% if params.cls %}{{ params.cls }}{% endif %}
   {% if params.textSize %}form-control-{{ params.textSize }}{% endif %}
-  {% if params.plainText %}form-control-plaintext{% else %}form-control{% endif %}"
+  {{ dcss }}"
   {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.placeHolder %}placeholder="{{ params.placeHolder }}"{% endif %}
   {% if params.hintId %}aria-describedby="{{ params.hintId }}"{% endif %}
