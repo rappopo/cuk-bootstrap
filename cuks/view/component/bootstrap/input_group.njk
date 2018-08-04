@@ -3,23 +3,11 @@
     {% if _.isString(b) %}{% set b = { type: 'text', text: b } %}{% endif %}
     {% if b.type == 'radio' %}
       <div class="input-group-text">
-        <input type="radio"
-          {% if b.checked %}checked{% endif %}
-          {% if b.id %}id="{{ b.id }}"{% endif %}
-          {% if b.ariaLabel %}id="{{ b.ariaLabel }}"{% endif %}
-          {% if b.attr %}{{ b.attr }}{% endif %}
-          {{ cmpt('dataAttr', b.data) }}
-        >
+        {{ cmpt('radio', _.merge(b, { plain: true }) ) }}
       </div>
     {% elif b.type == 'checkbox' %}
       <div class="input-group-text">
-        <input type="checkbox"
-          {% if b.checked %}checked{% endif %}
-          {% if b.id %}id="{{ b.id }}"{% endif %}
-          {% if b.ariaLabel %}id="{{ b.ariaLabel }}"{% endif %}
-          {% if b.attr %}{{ b.attr }}{% endif %}
-          {{ cmpt('dataAttr', b.data) }}
-        >
+        {{ cmpt('checkbox', _.merge(b, { plain: true }) ) }}
       </div>
     {% elif b.type == 'button' %}
       {% set b = _.omit(b, ['block', 'active', 'tag']) %}
@@ -36,9 +24,7 @@
 <div class="input-group
   {% if params.textSize %}input-group-{{ params.textSize }}{% endif %}
   {% if params.cls %}{{ params.cls }}{% endif %}"
-  {% if params.id %}id="{{ params.id }}"{% endif %}
-  {% if params.attr %}{{ params.attr }}{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', _.merge(params, { skipTtPo: true })) }}
 >
   {% if params.before %}
     <div class="input-group-prepend
@@ -51,7 +37,7 @@
     </div>
   {% endif %}
 
-  {% for i in ['name', 'value', 'values', 'readOnly', 'placeHolder', 'type', 'disabled', 'inputId', 'inputCls'] %}
+  {% for i in ['name', 'value', 'values', 'readOnly', 'placeHolder', 'type', 'disabled', 'inputId', 'inputCls', 'tt', 'ttDir', 'po', 'poDir', 'title', 'poNoDismiss'] %}
     {% if params[i] %}
       {% set params = _.merge(params, { input: _.set({}, i, params[i]) }) %}
     {% endif %}

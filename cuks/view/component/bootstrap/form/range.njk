@@ -1,4 +1,4 @@
-{% for i in ['name', 'value', 'readOnly', 'custom', 'textSize', 'disabled', 'inputId', 'inputCls'] %}
+{% for i in ['name', 'value', 'readOnly', 'custom', 'textSize', 'disabled', 'inputId', 'inputCls', 'tt', 'ttDir', 'po', 'poDir', 'title', 'poNoDismiss'] %}
   {% if params[i] %}
     {% set params = _.merge(params, { input: _.set({}, i, params[i]) }) %}
   {% endif %}

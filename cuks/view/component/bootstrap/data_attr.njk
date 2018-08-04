@@ -1,5 +1,0 @@
-{% if _.isPlainObject(params) %}
-  {% for k,v in params %}
-  data-{{ k }}="{{ v|safe }}"
-  {% endfor %}
-{% endif %}

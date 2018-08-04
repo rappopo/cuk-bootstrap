@@ -1,0 +1,33 @@
+{% if not params.layout %}
+{% set params = _.merge(params, { layout: 'vertical' }) %}
+{% set input = params.input if _.isArray(params.input) else [params.input] %}
+{% endif %}
+{% if params.stacked %}
+<div class="form-group {{ params.cls }}"
+  {% if params.id %}id="{{ params.id }}"{% endif %}
+>
+  {{ cmpt('label', params.label) }}
+  {% for i in input %}
+    {{ cmpt(params.baseCmpt, i) }}
+  {% endfor %}
+  {% if params.hint %}
+  {{ cmpt('hint', params.hint) }}
+  {% endif %}
+</div>
+{% else %}
+{% set width = params.width|d('3:9')|split(':') %}
+<div class="form-group row {{ params.cls }}"
+  {% if params.id %}id="{{ params.id }}"{% endif %}
+>
+  {{ cmpt('label', { text: params.label.text, for: params.input[0].id, cls: 'col-form-label col-sm-' + width[0] + ' ' + params.label.cls|d('') }) }}
+  <div class="col-sm-{{ width[1] }}
+    {% if params.inline %}mt-1{% endif %}">
+    {% for i in input %}
+      {{ cmpt(params.baseCmpt, i) }}
+    {% endfor %}
+    {% if params.hint %}
+    {{ cmpt('hint', params.hint) }}
+    {% endif %}
+  </div>
+</div>
+{% endif %}

@@ -1,0 +1,22 @@
+<ul class="list-group
+  {% if params.noBorder %}list-group-flush{% endif %}"
+>
+  {% for item in params.item %}
+    {% set item = item if _.isPlainObject(item) else { text: item } %}
+    <{{ 'a' if item.href else 'li' }} class="list-group-item
+      {% if item.disabled %}disabled{% endif %}
+      {% if item.active %}active{% endif %}
+      {% if item.context %}list-group-item-{{ item.context }}{% endif %}
+      {% if item.badge %}d-flex justify-content-between align-items-center{% endif %}
+      {% if item.cls %}{{ item.cls }}{% endif %}"
+      {% if item.href %}href="{{ '#' if item.href === true else item.href }}"{% endif %}
+      {{ cmpt('commonAttr', item) }}
+    >
+    {{ item.text }}
+    {% if item.badge %}
+      {% set badge = item.badge if _.isPlainObject(item.badge) else { text: item.badge } %}
+      {{ cmpt('badge', badge) }}
+    {% endif %}
+    </{{ 'a' if item.href else 'li' }}>
+  {% endfor %}
+</ul>

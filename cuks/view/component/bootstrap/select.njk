@@ -29,15 +29,13 @@
   {% if params.custom %}custom-select{% else %}form-control{% endif %}
   {% if params.cls %}{{ params.cls }}{% endif %}
   {% if params.textSize %}form-control-{{ params.textSize }}{% endif %}"
-  {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.placeHolder %}placeholder="{{ params.placeHolder }}"{% endif %}
   {% if params.hintId %}aria-describedby="{{ params.hintId }}"{% endif %}
   {% if params.readOnly %}readonly{% endif %}
   {% if params.disabled %}disabled{% endif %}
   {% if params.multiple %}multiple{% endif %}
   {% if params.rows %}size="{{ params.rows }}"{% endif %}
-  {% if params.attr %}{{ params.attr }}{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', params) }}
 >
 {% for v in values %}
   {% if params.multiple %}

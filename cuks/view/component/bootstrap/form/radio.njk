@@ -2,7 +2,7 @@
 {% set newInput = [] %}
 {% for i in input %}
   {% set item = {} %}
-  {% for val in ['name', 'textSize', 'disabled', 'inline', 'custom'] %}
+  {% for val in ['name', 'textSize', 'disabled', 'inline', 'custom', 'tt', 'ttDir', 'po', 'poDir', 'title', 'poNoDismiss'] %}
     {% if params[val] %}
       {% set item = _.merge(item, _.set({}, val, params[val])) %}
     {% endif %}

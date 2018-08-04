@@ -10,11 +10,9 @@
   {% if params.block %}btn-block{% endif %}
   {% if params.active %}active{% endif %}
   {% if params.disabled %}disabled{% endif %}"
-  {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.disabled %}tabindex="-1" aria-disabled="true"{% endif %}
   {% if params.active %}aria-pressed="true"{% endif %}
-  {% if params.attr %}{{ params.attr|safe }}{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', params) }}
 >{{ params.title }}</button>
 {% else %}
 <button type="button" class="btn
@@ -23,10 +21,8 @@
   {% if params.textSize %}btn-{{ params.textSize }}{% endif %}
   {% if params.block %}btn-block{% endif %}
   {% if params.active %}active{% endif %}"
-  {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.disabled %}disabled{% endif %}
   {% if params.active %}aria-pressed="true"{% endif %}
-  {% if params.attr %}{{ params.attr|safe }}{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', params) }}
 >{{ params.title }}</button>
 {% endif %}

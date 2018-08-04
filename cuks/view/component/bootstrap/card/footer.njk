@@ -1,0 +1,10 @@
+<{{ params.tag|d('div') }} class="
+  {% if params.context %}bg-{{ params.context }}{% endif %}
+  {% if params.textColor %}text-{{ params.textColor }}{% endif %}
+  {% if params.borderColor %}border-{{ params.borderColor }}{% endif %}
+  {% if params.cls %}{{ params.cls }}{% endif %}
+  card-footer"
+  {{ cmpt('commonAttr', params )) }}
+>
+  {{ params.content }}
+</{{ params.tag|d('div') }} >

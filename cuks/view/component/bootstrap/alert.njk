@@ -1,13 +1,12 @@
-<div {% if params.id %}id="{{ params.id }}"{% endif %} role="alert" class="alert alert-{{ params.context }}
+<div role="alert" class="alert alert-{{ params.context }}
   {% if params.cls %}{{ params.cls }}{% endif %}
-  {% if params.dismissable %}alert-dismissable{% endif %}
+  {% if params.dismiss %}alert-dismissable{% endif %}
   {% if not params.noAnimation %}fade show{% endif %}
   "
-  {% if params.attr %}{{ params.attr|safe }}{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', params) }}
 >
 {{ params.content|safe }}
-{% if params.dismissable %}
+{% if params.dismiss %}
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
   <span aria-hidden="true">&times;</span>
 </button>

@@ -9,9 +9,7 @@
     <a href="{{ m.href|d('#')|safe }}" class="dropdown-item
       {% if m.active %}active{% endif %}
       {% if m.disabled %}disabled{% endif %}"
-      {% if m.id %}id="{{ m.id }}"{% endif %}
-      {{ cmpt('dataAttr', m.data) }}
-      {% if m.attr %}{{ m.attr|safe }}{% endif %}
+      {{ cmpt('commonAttr', _.merge(m, { skipTtPo: true })) }}
     >{{ m.text }}</a>
   {% endif %}
 {% endfor %}
@@ -22,10 +20,8 @@
 {% endif %}
 {% if not params.noWrapper %}
 <div class="dropdown {{ params.wrapperCls }}
-  {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.split %}btn-group{% endif %}
   {% if params.dir %}drop{{ params.dir }}{% endif %}"
-  {{ cmpt('dataAttr', params.data) }}
 >
 {% endif %}
   {% if params.split %}
@@ -41,8 +37,7 @@
     {% if params.textSize %}btn-{{ params.textSize }}{% endif %}
     {% if params.block %}btn-block{% endif %}
     {% if params.active %}active{% endif %}"
-    {% if params.id %}id="{{ params.id }}-btn"{% endif %}
-    {% if params.attr %}{{ params.attr|safe }}{% endif %}
+    {{ cmpt('commonAttr', params) }}
   >
     {% if params.split %}
     <span class="sr-only">Toggle Dropdown</span>

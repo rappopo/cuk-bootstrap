@@ -1,6 +1,5 @@
 <nav aria-label="breadcrumb"
-  {% if params.id %}id="{{ params.id }}"{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', params) }}
 >
   <ol class="breadcrumb {% if params.wrapperCls %}{{ params.wrapperCls }}{% endif %}">
   {% for i in params.items %}

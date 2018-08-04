@@ -4,7 +4,5 @@
   {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.hintId %}aria-describedby="{{ params.hintId }}"{% endif %}
   {% if params.readOnly %}readonly{% endif %}
-  {% if params.value %}value="{{ params.value }}"{% endif %}
-  {% if params.attr %}{{ params.attr }}{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', params) }}
 >

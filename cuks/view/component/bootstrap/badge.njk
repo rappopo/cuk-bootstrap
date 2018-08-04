@@ -1,24 +1,21 @@
 {% if params.tag == 'a' %}
-  <a href="{% if params.href|safe %}{{ params.href }}{% else %}#{% endif %}"
-    {% if params.id %}id="{{ params.id }}"{% endif %} class="badge
+  <a href="{% if params.href|safe %}{{ params.href }}{% else %}#{% endif %}" class="badge
     {% if params.cls %}{{ params.cls }}{% endif %}
     {% if params.context %}badge-{{ params.context }}{% endif %}
     {% if params.pill %}badge-pill{% endif %}
     {% if not params.noAnimation %}fade show{% endif %}
     "
-    {% if params.attr %}{{ params.attr|safe }}{% endif %}
-    {{ cmpt('dataAttr', params.data) }}
-  >{{ params.content }}</a>
+    {{ cmpt('commonAttr', params) }}
+  >{{ params.text }}</a>
 {% else %}
-  <span {% if params.id %}id="{{ params.id }}"{% endif %} class="badge
+  <span class="badge
     {% if params.cls %}{{ params.cls }}{% endif %}
     {% if params.context %}badge-{{ params.context }}{% endif %}
     {% if params.pill %}badge-pill{% endif %}
     {% if not params.noAnimation %}fade show{% endif %}
     "
-    {% if params.attr %}{{ params.attr|safe }}{% endif %}
-    {{ cmpt('dataAttr', params.data) }}
-  >{{ params.content }}</span>
+    {{ cmpt('commonAttr', params) }}
+  >{{ params.text }}</span>
 {% endif %}
 {% if params.srOnly %}
 <span class="sr-only">{{ params.srOnly }}</span>

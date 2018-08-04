@@ -10,12 +10,10 @@
   {% if params.cls %}{{ params.cls }}{% endif %}
   {% if params.textSize %}form-control-{{ params.textSize }}{% endif %}
   {{ dcss }}"
-  {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.placeHolder %}placeholder="{{ params.placeHolder }}"{% endif %}
   {% if params.hintId %}aria-describedby="{{ params.hintId }}"{% endif %}
   {% if params.readOnly or params.plainText %}readonly{% endif %}
   {% if params.disabled %}disabled{% endif %}
   {% if params.value %}value="{{ params.value }}"{% endif %}
-  {% if params.attr %}{{ params.attr }}{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', params) }}
 >

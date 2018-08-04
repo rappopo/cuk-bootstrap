@@ -22,6 +22,12 @@
     {% endif %}
     {% block script %}
     {% endblock %}
+    <script>
+    $(function(){
+      $('[data-toggle="tooltip"]').tooltip()
+      $('[data-toggle="popover"]').popover()
+    })
+    </script>
   </head>
   <body>
     {% if not noNavbar %}

@@ -4,13 +4,11 @@
 <input name="{{ params.name }}" type="file" class="{% if params.custom %}custom-file-input{% else %}form-control-file{% endif %}
   {% if params.cls %}{{ params.cls }}{% endif %}
   {% if params.textSize %}form-control-{{ params.textSize }}{% endif %}"
-  {% if params.id %}id="{{ params.id }}"{% endif %}
   {% if params.hintId %}aria-describedby="{{ params.hintId }}"{% endif %}
   {% if params.readOnly or params.plainText %}readonly{% endif %}
   {% if params.disabled %}disabled{% endif %}
   {% if params.value %}value="{{ params.value }}"{% endif %}
-  {% if params.attr %}{{ params.attr }}{% endif %}
-  {{ cmpt('dataAttr', params.data) }}
+  {{ cmpt('commonAttr', params) }}
 >
 {% if params.custom %}
   <label class="custom-file-label" {% if params.id %}for="{{ params.id }}"{% endif %}>{{ params.placeHolder }}</label>
