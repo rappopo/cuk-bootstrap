@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const { _ } = cuk.pkg.core.lib
   const lib = require('../_lib')(cuk)
 
@@ -8,8 +8,8 @@ module.exports = function(cuk) {
     let content = ''
     if (params.wrapper) {
       let cls = 'container '
-      if (params.wrapper.fullWidth) content += 'pl-0 pr-0 '
-      if (params.wrapper.cls) content += `${params.wrapper.cls} `
+      if (params.wrapper.fullWidth) cls += 'pl-0 pr-0 '
+      if (params.wrapper.cls) cls += `${params.wrapper.cls} `
       content += `<div class="${_.trim(cls)}">\n`
     }
     _.each(params.rows, r => {
@@ -25,7 +25,7 @@ module.exports = function(cuk) {
         if (c.break) {
           content += '<div class="w-100"></div>\n'
         } else {
-          let cls = `col${ c.width ? ('-' + c.width) : ''} `
+          let cls = `col${c.width ? ('-' + c.width) : ''} `
           if (c.order) cls += `order-${c.order} `
           if (c.offset) cls += `offset-${c.offset} `
           if (c.cls) cls += c.cls

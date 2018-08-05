@@ -9,7 +9,7 @@ module.exports = function(cuk) {
     if (params.plain) params.readonly = true
     if (params.textSize) cls += `form-control-${params.textSize} `
     if (params.textColor) cls += `content-${params.textColor} `
-    let content = `<input type="content" ${lib.attr(params, 'content')} class="${_.trim(cls)}">`
+    let content = `<input type="${params.type || 'text'}" ${lib.attr(params, 'content')} class="${_.trim(cls)}">\n`
     return content
   }
 

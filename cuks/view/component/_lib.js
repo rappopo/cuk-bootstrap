@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const { _ } = cuk.pkg.core.lib
 
   return {
@@ -29,12 +29,24 @@ module.exports = function(cuk) {
       if (params.name && caller && !params.id) params.id = `cmpt-${caller}-${params.name}`
 
       _.forOwn(params, (v, k) => {
+        if (k.substr(0, 4) === 'aria') k = 'aria-' + k.substr(4).toLowerCase()
         text += (v === true ? `${k} ` : `${k}="${v}" `)
       })
       _.forOwn(data, (v, k) => {
         text += `data-${k}="${v}" `
       })
       return _.trim(text)
+    },
+    attrFromParent: (tag, params, props) => {
+      let newParams = {}
+      _.each(props, item => {
+        if (params[item]) {
+          const key = item.substr(0, tag.length) === tag ? _.lowerFirst(item.substr(tag.length)) : item
+          newParams[key] = params[item]
+        }
+        delete params[item]
+      })
+      return newParams
     }
   }
 }

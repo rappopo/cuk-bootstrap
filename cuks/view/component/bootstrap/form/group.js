@@ -5,16 +5,20 @@ module.exports = function (cuk) {
   const lib = require('../../_lib')(cuk)
 
   return (params = {}, ctx) => {
-    const cmpt = cuk.pkg.view.lib.cmpt(ctx)
-    params = _.omit(params, ['tt', 'ttDir', 'po', 'poDir', 'poContainer', 'poTitle', 'poNoDismiss'])
-    params.input = params.input || ''
     params.label = params.label || {}
+    params.input = params.input || ''
+    const cmpt = cuk.pkg.view.lib.cmpt(ctx)
+
+    let label = params.label
+    if (_.isString(label)) {
+      label = lib.attrFromParent('label', params, ['labelCls', 'labelDisabled', 'labelId', 'labelTextSize',
+        'labelTt', 'labelTtDir', 'labelPo', 'labelPoDir', 'labelPoTitle', 'labelPoContainer', 'labelPoNoDismiss'])
+      label = _.merge(label, { content: params.label })
+    }
+
     let content = `<div class="form-group ${params.stacked ? '' : 'row'} `
     if (params.cls) content += params.cls
     content += `" ${_.trim(lib.attr(params))}>`
-
-    let label = params.label
-    if (_.isString(label)) label = { content: label }
     label.content = label.content || ''
     if (params.stacked) {
       content += cmpt('label', label, ctx) + '\n' + params.input + '\n'
