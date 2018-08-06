@@ -1,9 +1,0 @@
-<div class="jumbotron{% if params.fluid %} jumbotron-fluid{% endif %}">
-  {% if params.fluid %}<div class="container">{% endif %}
-  {% if params.title %}<h1>{{ params.title }}</h1>{% endif %}
-  {% if params.lead %}<p class="lead">{{ params.lead }}</p>{% endif %}
-  {% if params.divider %}<hr class="my-4" />{% endif %}
-  {% if params.body %}{{ params.body }}{% endif %}
-  {% if params.fluid %}</div>{% endif %}
-  {{ cmpt('commonAttr', _.merge(params, { skipTtPo: true })) }}
-</div>

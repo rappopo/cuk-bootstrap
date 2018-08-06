@@ -9,7 +9,8 @@ module.exports = function (cuk) {
         picked = caller
         caller = null
       }
-      picked = picked || ['id', 'name', 'value', 'disabled', 'readonly', 'style', 'for', 'rel']
+      picked = picked || ['id', 'name', 'value', 'disabled', 'checked', 'readonly', 'style',
+        'for', 'rel', 'cols', 'rows', 'multiple', 'placeholder']
       let text = ''
       let data = params.data || {}
       if (params.tt) {

@@ -1,8 +1,0 @@
-<input name="{{ params.name }}" type="range" class="
-  {% if params.custom %}custom-range{% else %}form-control-range{% endif %}
-  {% if params.cls %}{{ params.cls }}{% endif %}"
-  {% if params.id %}id="{{ params.id }}"{% endif %}
-  {% if params.hintId %}aria-describedby="{{ params.hintId }}"{% endif %}
-  {% if params.readOnly %}readonly{% endif %}
-  {{ cmpt('commonAttr', params) }}
->

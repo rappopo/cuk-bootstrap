@@ -14,7 +14,7 @@ module.exports = function (cuk) {
     if (params.context) cls += `badge-${params.context} `
     if (params.pill) cls += `badge-pill `
     content += lib.attr(params, ['id', 'style', 'rel'])
-    content += ` class="${_.trim(cls)}">${params.content}</${params.aTag ? 'a' : 'span'}>\n`
+    content += ` class="${_.trim(cls)}">${params.text}</${params.aTag ? 'a' : 'span'}>\n`
     if (params.srOnly) content += `<span class="sr-only">${params.srOnly}</span>\n`
     return content
   }

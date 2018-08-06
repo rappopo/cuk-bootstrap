@@ -1,4 +1,0 @@
-<label {% if params.for %}for="{{ params.for }}"{% endif %} class="
-  {% if params.cls %}{{ params.cls }}{% endif %}"
-  {{ cmpt('commonAttr', _.merge(params, { skipTtPo: true })) }}
->{{ params.text }}</label>
