@@ -1,7 +1,6 @@
 'use strict'
 
-module.exports = function(cuk) {
-  const { _ } = cuk.pkg.core.lib
+module.exports = function (cuk) {
   const lib = require('../_lib')(cuk)
 
   return (params, ctx) => {
@@ -10,5 +9,4 @@ module.exports = function(cuk) {
     content += `>${params.content}</label>`
     return content
   }
-
 }

@@ -1,27 +1,11 @@
 'use strict'
 
 module.exports = function (cuk) {
-  const { _ } = cuk.pkg.core.lib
+  // const { _ } = cuk.pkg.core.lib
   const lib = require('../_lib')(cuk)
 
-  const buildMenu = menu => {
-    let result = ''
-    _.each(menu, m => {
-      if (_.isString(m)) m = { text: m }
-      if (m.divider || m.text === '-') {
-        result += `<div class="dropdown-divider"></div>\n`
-      } else {
-        result += `<a href="${m.href || '#'}" class="dropdown-item `
-        if (m.active) result += 'active '
-        if (m.disabled) result += 'disabled '
-        result += `" ${lib.attr(m, ['id', 'style', 'rel'])}>\n`
-        result += `${m.text}\n</a>`
-      }
-    })
-    return result
-  }
-
   return (params = {}, ctx) => {
+    const cmpt = cuk.pkg.view.lib.cmpt(ctx)
     params.context = params.context || 'primary'
     let content = ''
 
@@ -54,18 +38,11 @@ module.exports = function (cuk) {
       content += params.title
     }
     content += '</button>\n'
-    content += `<div class="dropdown-menu ${params.align ? ('dropdown-menu-' + params.align) : ''}" `
-    if (params.id) content += `aria-labeledby="${params.id}-btn" `
-    content += '>\n'
-    if (_.isPlainObject(params.menu)) {
-      _.forOwn(params.menu, (v, k) => {
-        content += `<h6 class="dropdown-header">${k}</h6>\n`
-        content += buildMenu(v)
-      })
-    } else {
-      content += buildMenu(params.menu)
-    }
-    content += '</div>\n'
+    content += cmpt('menu', {
+      content: params.menu,
+      ariaLabeledby: params.id ? (params.id + '-btn') : null,
+      align: params.align
+    }, ctx)
     if (!params.noWrapper) {
       content += '</div>\n'
     }

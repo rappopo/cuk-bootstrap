@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (cuk) {
-  const { _ } = cuk.pkg.core.lib
+  const { _, util } = cuk.pkg.core.lib
 
   return {
     attr: (params, caller, picked) => {
@@ -37,6 +37,37 @@ module.exports = function (cuk) {
         text += `data-${k}="${v}" `
       })
       return _.trim(text)
+    },
+    cls: (params, picked = [], added = {}) => {
+      let all = {
+        cls: '%s',
+        textSize: 'btn-%s',
+        textColor: 'text-%s',
+        context: 'btn-%s',
+        disabled: 'disabled',
+        active: 'active',
+        align: 'justify-content-%s',
+        outline: p => {
+          if (!params.context) return ''
+          return 'btn-' + (p ? 'outline-' : '') + params.context
+        }
+      }
+      all = _.merge(all, added)
+      if (picked && picked.length > 0) all = _.pick(all, picked)
+      // if (!params.aTag) helper('core:objectDelProp')(all, ['disabled', 'active'])
+      let cls = ''
+      _.forOwn(all, (v, k) => {
+        if (params[k]) {
+          if (_.isFunction(v)) {
+            cls += v(params[k]) + ' '
+          } else if (_.isString(params[k])) {
+            cls += `${util.format(v, params[k])} `
+          } else {
+            cls += `${v} `
+          }
+        }
+      })
+      return _.trim(cls)
     },
     attrFromParent: (tag, params, props) => {
       let newParams = {}
