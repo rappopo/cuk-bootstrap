@@ -6,6 +6,7 @@ module.exports = function (cuk) {
 
   return (params, ctx) => {
     const cmpt = cuk.pkg.view.lib.cmpt(ctx)
+    let attr = lib.attr(params)
     if (_.isArray(params)) params = { items: params }
     if (!params.id) params.id = 'cmpt-nav-' + helper('core:makeId')()
     let cls = lib.cls(params, null, {
@@ -28,9 +29,9 @@ module.exports = function (cuk) {
     let isValidPanes = panes.length === params.items.length
     let header = ''
     if (isValidPanes && !params.ulTag) {
-      header = `<nav><div class="nav ${cls}" ${lib.attr(params, ['id', 'style', 'rel'])} `
+      header = `<nav><div class="nav ${cls}" ${attr} `
     } else {
-      header = `<${params.ulTag ? 'ul' : 'nav'} class="nav ${cls}" ${lib.attr(params, ['id', 'style', 'rel'])} `
+      header = `<${params.ulTag ? 'ul' : 'nav'} class="${params.navbar ? 'navbar-' : ''}nav ${cls}" ${attr} `
     }
     if (isValidPanes) header += `role="tablist" `
     if (isValidPanes && !params.ulTag) {
@@ -41,7 +42,7 @@ module.exports = function (cuk) {
     _.each(params.items, (item, i) => {
       if (_.isString(item)) item = { title: item }
       let id = item.id || (params.id + '-' + i)
-      if (params.ulTag) header += `<li class="nav-item${item.menu ? ' dropdown' : ''}">`
+      if (params.ulTag) header += `<li class="nav-item${item.menu ? ' dropdown' : ''}">\n`
       header += `<a id="${id}-tab" class="${item.menu ? 'dropdown-toggle ' : ''} `
       let cls = lib.cls(item, ['active', 'disabled']) || ''
       header += `${params.ulTag ? 'nav-item ' : ''}nav-link ${cls}" `
@@ -52,7 +53,9 @@ module.exports = function (cuk) {
         href = `#${id}-pane`
         header += `data-toggle="tab" role="tab" aria-controls="${id}-pane" aria-selected="${item.active ? 'true' : 'false'}" `
       }
-      header += `href="${href}">${item.title || ''}</a>`
+      header += `href="${href}">${item.title || ''}`
+      if (item.active) header += ` <span class="sr-only">(current)</span>`
+      header += `</a>\n`
       if (item.menu) header += cmpt('menu', item.menu, ctx)
       if (params.ulTag) header += `</li>\n`
     })
@@ -76,12 +79,12 @@ module.exports = function (cuk) {
     if (!isValidPanes) return header
     if (!params.vertical) return header + tabs
     return cmpt('grid', {
-      rows: [
-        [
+      rows: [{ noGutter: params.noGutter,
+        cols: [
           { width: params.verticalWidth[0], content: header },
           { width: params.verticalWidth[1], content: tabs }
         ]
-      ]
+      }]
     })
   }
 }

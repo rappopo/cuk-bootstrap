@@ -6,10 +6,11 @@ module.exports = function (cuk) {
 
   return (params = {}, ctx) => {
     const cmpt = cuk.pkg.view.lib.cmpt(ctx)
+    let attr = lib.attr(params)
 
     let content = `<ul class="list-group `
     if (params.noBorder) content += `list-group-flush `
-    content += '">\n'
+    content += `" ${attr}>\n`
     _.each(params.items, item => {
       item = _.isPlainObject(item) ? item : { text: item }
       content += `<${item.href ? 'a' : 'li'} class="list-group-item `

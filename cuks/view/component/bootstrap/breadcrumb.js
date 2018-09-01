@@ -5,7 +5,8 @@ module.exports = function (cuk) {
   const lib = require('../_lib')(cuk)
 
   return (params = {}, ctx) => {
-    let content = '<nav aria-label="breadcrumb" ' + lib.attr(params, ['id', 'style', 'rel']) + '>\n'
+    let attr = lib.attr(params)
+    let content = `<nav aria-label="breadcrumb" ${attr}>\n`
     let wrapper = params.wrapper || {}
     content += `<ol class="breadcrumb ${wrapper.cls || ''}">\n`
     let items = _.isArray(params.items) ? params.items : []
@@ -18,7 +19,7 @@ module.exports = function (cuk) {
       content += `<li class="breadcrumb-item `
       if (i.active) content += 'active '
       if (i.cls) content += `${i.cls} `
-      content += '" ' + lib.attr(i, ['id', 'rel', 'style']) + '>\n'
+      content += '" ' + lib.attr(i) + '>\n'
       if (i.href) {
         content += `<a href="${i.href}">${i.text}</a>\n`
       } else {

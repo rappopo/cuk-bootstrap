@@ -2,12 +2,13 @@
 
 module.exports = function (cuk) {
   const { _, helper } = cuk.pkg.core.lib
-  // const lib = require('../_lib')(cuk)
+  const lib = require('../_lib')(cuk)
 
   return (params = {}, ctx) => {
     if (_.isArray(params)) params = { items: params }
+    let attr = lib.attr(params)
     if (!params.id) params.id = 'cmpt-accordion-' + helper('core:makeId')()
-    let content = `<div class="accordion" id="${params.id}">`
+    let content = `<div class="accordion" ${attr}>`
     params.items = _.isArray(params.items) ? params.items : [params.items]
     _.each(params.items, (t, i) => {
       if (!t.id) t.id = params.id + '-item-' + i

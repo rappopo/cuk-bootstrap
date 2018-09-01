@@ -31,7 +31,7 @@ module.exports = function (cuk) {
     let cls = 'input-group '
     if (params.textSize) cls += `input-group-${params.textSize} `
     if (params.cls) cls += params.cls
-    let content = `<div class="${_.trim(cls)}" ${lib.attr(params, ['id', 'rel', 'style'])}>\n`
+    let content = `<div class="${_.trim(cls)}" ${lib.attr(params)}>\n`
     if (params.before) {
       content += `<div class="input-group-prepend `
       if (params.before.type === 'dropdown' && params.before.dir) {

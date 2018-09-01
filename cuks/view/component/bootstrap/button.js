@@ -6,6 +6,7 @@ module.exports = function (cuk) {
 
   return (params = {}, ctx) => {
     params.context = params.context || 'primary'
+    let attr = lib.attr(params)
     let cls = 'btn '
     let content = `<${params.aTag ? 'a' : 'button'} `
     if (params.aTag) {
@@ -26,8 +27,7 @@ module.exports = function (cuk) {
       cls += `active `
       content += `aria-pressed="true" `
     }
-    content += lib.attr(params, ['id', 'style', 'rel'])
-    content += ` class="${_.trim(cls)}">${params.title}</${params.aTag ? 'a' : 'button'}>\n`
+    content += `${attr} class="${_.trim(cls)}">${params.title}</${params.aTag ? 'a' : 'button'}>\n`
     return content
   }
 }

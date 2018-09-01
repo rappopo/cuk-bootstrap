@@ -1,7 +1,7 @@
 {
   "name": "@rappopo/cuk-bootstrap",
-  "version": "0.0.1",
-  "description": "Bootstrap 4 skin",
+  "version": "0.0.2",
+  "description": "Rappopo CUK Bootstrap 4 Skin",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

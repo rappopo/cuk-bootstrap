@@ -19,7 +19,7 @@ module.exports = function (cuk) {
       if (r.valign) cls += 'align-items-' + r.valign
       if (r.align) cls += 'justify-content-' + r.align
       if (r.cls) cls += r.cls
-      content += `<div class="${_.trim(cls)}" ${lib.attr(r, ['id', 'style'])}>\n`
+      content += `<div class="${_.trim(cls)}" ${lib.attr(r)}>\n`
       _.each(r.cols, c => {
         if (_.isString(c)) c = { content: c }
         if (c.break) {
@@ -29,7 +29,7 @@ module.exports = function (cuk) {
           if (c.order) cls += `order-${c.order} `
           if (c.offset) cls += `offset-${c.offset} `
           if (c.cls) cls += c.cls
-          content += `<div class="${_.trim(cls)}" ${lib.attr(c, ['id', 'style'])}>${c.content}</div>\n`
+          content += `<div class="${_.trim(cls)}" ${lib.attr(c)}>${c.content}</div>\n`
         }
       })
       content += '</div>\n'

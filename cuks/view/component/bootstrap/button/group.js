@@ -10,7 +10,7 @@ module.exports = function (cuk) {
     let content = `<div class="btn-group${params.stacked ? '-vertical' : ''} `
     if (params.textSize) content += `btn-group-${params.textSize} `
     if (params.cls) content += `${params.cls}" `
-    content += 'role="group" ' + lib.attr(params, ['id', 'style', 'rel', 'ariaLabel']) + '>\n'
+    content += 'role="group" ' + lib.attr(params) + '>\n'
     _.each(params.buttons || [], b => {
       if (_.isPlainObject(b)) {
         content += cmpt('button', b, ctx)

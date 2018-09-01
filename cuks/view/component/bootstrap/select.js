@@ -22,16 +22,17 @@ module.exports = function (cuk) {
         values.push(_.isString(v) ? { id: v, text: v } : { id: v.id, text: v.text })
       })
     }
+    let attr = lib.attr(params, 'select', ['name', 'value', 'readonly', 'disabled', 'placeholder', 'multiple'])
     let cls = `${params.custom ? 'custom-select' : 'form-control'} `
     if (params.cls) cls += `${params.cls} `
     if (params.textSize) cls += `form-control-${params.textSize} `
     if (params.textColor) cls += `content-${params.textColor} `
-    let content = `<select name="${params.name}" class="${_.trim(cls)}" `
+    let content = `<select class="${_.trim(cls)}" `
     if (params.rows) {
       content += `size="${params.rows}" `
       delete params.rows
     }
-    content += `${lib.attr(params)}>\n`
+    content += `${attr}>\n`
     _.each(values, v => {
       if (params.multiple) {
         content += `<option value="${v.id}"${value.indexOf(v.id) > -1 ? ' selected' : ''}>`

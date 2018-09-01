@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (cuk) {
-  const { _, util } = cuk.pkg.core.lib
+  const { _, util, helper } = cuk.pkg.core.lib
 
   return {
     attr: (params, caller, picked) => {
@@ -9,34 +9,50 @@ module.exports = function (cuk) {
         picked = caller
         caller = null
       }
-      picked = picked || ['id', 'name', 'value', 'disabled', 'checked', 'readonly', 'style',
-        'for', 'rel', 'cols', 'rows', 'multiple', 'placeholder']
-      let text = ''
-      let data = params.data || {}
-      if (params.tt) {
-        data['toggle'] = 'tooltip'
-        data['placement'] = params.ttDir || 'top'
-        text += ` title="${params.tt}" `
-      } else if (params.po) {
-        data['toggle'] = 'popover'
-        data['placement'] = params.poDir || 'top'
-        data['content'] = params.po
-        if (params.poContainer) data['container'] = params.poContainer
-        if (params.poTitle) text += ` title="${params.poTitle}" `
-        if (!params.poNoDismiss) data['trigger'] = 'focus'
-      }
-      params = _.omit(params, ['data', 'tt', 'ttDir', 'po', 'poDir', 'poContainer', 'poTitle', 'poNoDismiss'])
-      params = _.pick(params, picked)
+      picked = _.uniq(_.concat(['id', 'style', 'rel'], picked || []))
+      let attrs = ''
       if (params.name && caller && !params.id) params.id = `cmpt-${caller}-${params.name}`
-
-      _.forOwn(params, (v, k) => {
-        if (k.substr(0, 4) === 'aria') k = 'aria-' + k.substr(4).toLowerCase()
-        text += (v === true ? `${k} ` : `${k}="${v}" `)
+      // handle subs
+      _.each(['data', 'aria'], s => {
+        params[s] = params[s] || {}
+        _.forOwn(params, (v, k) => {
+          let keys = _.snakeCase(k).split('_')
+          if (keys.length > 1 && keys[0] === s) {
+            _.drop(keys)
+            params[s][keys.join('-')] = v
+          }
+        })
       })
-      _.forOwn(data, (v, k) => {
-        text += `data-${k}="${v}" `
+      // handle tooltips & popover
+      _.each(['tooltip', 'popover'], t => {
+        params[t] = params[t] || {}
+        if (!_.isEmpty(params[t])) {
+          params.data = _.merge(params.data || {}, {
+            toggle: t,
+            placement: params.tooltip.dir || 'top'
+          })
+          if (params[t].title) attrs += `title="${params[t].title}" `
+        }
       })
-      return _.trim(text)
+      if (!_.isEmpty(params.popover)) {
+        params.data.content = params.popover.content
+        if (params.popover.container) params.data.container = params.popover.container
+        if (!params.popover.noDismiss) params.data.trigger = 'focus'
+      }
+      // generate attrs
+      _.forOwn(_.pick(params, picked), (v, k) => {
+        if (_.isPlainObject(v)) return
+        attrs += `${k}="${v}" `
+      })
+      _.each(['data', 'aria'], s => {
+        if (!_.isEmpty(params[s])) {
+          _.forOwn(params[s], (v, k) => {
+            attrs += `${s}-${k}="${v}" `
+          })
+        }
+      })
+      helper('core:objectDelProp')(params, ['tooltip', 'popover', 'data', 'aria'])
+      return _.trim(attrs)
     },
     cls: (params, picked = [], added = {}) => {
       let all = {

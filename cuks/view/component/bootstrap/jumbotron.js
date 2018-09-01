@@ -4,7 +4,8 @@ module.exports = function (cuk) {
   const lib = require('../_lib')(cuk)
 
   return (params = {}, ctx) => {
-    let content = `<div class="jumbotron${params.fluid ? ' jumbotron-fluid' : ''}" ${lib.attr(params)}>\n`
+    let attr = lib.attr(params)
+    let content = `<div class="jumbotron${params.fluid ? ' jumbotron-fluid' : ''}" ${attr}>\n`
     if (params.fluid) content += `<div class="container">\n`
     if (params.title) content += `<h1 class="display-4">${params.title}</h1>\n`
     if (params.lead) content += `<p class="lead">${params.lead}</p>\n`

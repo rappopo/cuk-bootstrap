@@ -23,8 +23,8 @@ module.exports = function (cuk) {
 
   return (params = {}, ctx) => {
     if (_.isArray(params)) params = { content: params }
-    let content = `<div class="dropdown-menu ${params.align ? ('dropdown-menu-' + params.align) : ''}" `
-    if (params.ariaLabeledby) content += `aria-labeledby="${params.ariaLabeledby}" `
+    let attr = lib.attr(params)
+    let content = `<div class="dropdown-menu ${params.align ? ('dropdown-menu-' + params.align) : ''}" ${attr} `
     content += '>\n'
     if (_.isPlainObject(params.content)) {
       _.forOwn(params.content, (v, k) => {

@@ -6,11 +6,12 @@ module.exports = function (cuk) {
 
   return (params = {}, ctx) => {
     const cmpt = cuk.pkg.view.lib.cmpt(ctx)
+    let attr = lib.attr(params)
     let content = `<div class="card ${params.cls || ''} `
     if (params.context) content += `bg-${params.context} `
     if (params.textColor) content += `text-${params.textColor} `
     if (params.borderColor) content += `border-${params.borderColor} `
-    content += `" ${lib.attr(params)}>`
+    content += `" ${attr}>`
     if (params.header) {
       const header = _.isPlainObject(params.header) ? params.header : { content: params.header }
       content += cmpt('cardHeader', header, ctx)

@@ -6,8 +6,9 @@ module.exports = function (cuk) {
 
   return (params = {}, ctx) => {
     if (_.isArray(params)) params = { content: params }
+    let attr = lib.attr(params)
     params.content = _.isArray(params.content) ? params.content : [params.content]
-    let content = `<div class="carousel slide ${params.crossfade ? 'carousel-fade' : ''}" data-ride="carousel" ${lib.attr(params, ['id', 'style', 'rel'])}>\n`
+    let content = `<div class="carousel slide ${params.crossfade ? 'carousel-fade' : ''}" data-ride="carousel" ${attr}>\n`
     if (params.indicator && params.id) {
       content += `<ol class="carousel-indicators">\n`
       _.each(params.content, (c, i) => {

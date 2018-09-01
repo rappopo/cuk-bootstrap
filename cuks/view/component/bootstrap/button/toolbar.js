@@ -9,7 +9,7 @@ module.exports = function (cuk) {
     if (_.isArray(params)) params = { groups: params }
     let content = `<div class="btn-toolbar${params.stacked ? '-vertical' : ''} `
     if (params.cls) content += `${params.cls}" `
-    content += 'role="toolbar" ' + lib.attr(params, ['id', 'style', 'rel', 'ariaLabel']) + '>\n'
+    content += 'role="toolbar" ' + lib.attr(params) + '>\n'
     _.each(params.groups || [], g => {
       if (_.isPlainObject(g)) {
         content += cmpt('buttonGroup', g, ctx)
