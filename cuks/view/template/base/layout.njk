@@ -8,7 +8,7 @@
     {% else %}
     <link rel="stylesheet" href="{{ config('static').mount }}/bootstrap/css/bootstrap.min.css">
     {% endif %}
-    <title>{{ page.title|d(route.site.hostname) }}</title>
+    <title>{{ page.title|d(route.site.name) }}</title>
     {% block style %}
     {% endblock %}
     {% if config('bootstrap').useCdn %}
