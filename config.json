@@ -1,9 +1,7 @@
 {
-  "common": {
-    "skinName": "Bootstrap",
-    "fluidContainer": false,
-    "useCdn": false,
-    "navbar": "fixed-top navbar-dark bg-primary",
-    "themes": []
-  }
+  "skinName": "Bootstrap",
+  "fluidContainer": false,
+  "useCdn": false,
+  "navbar": "fixed-top navbar-dark bg-primary",
+  "themes": []
 }
