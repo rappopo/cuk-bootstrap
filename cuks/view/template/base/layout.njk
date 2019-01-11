@@ -4,23 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% if ctx.state.site.theme %}
-    <link rel="stylesheet" href="{{ config('static').mount }}/{{ ctx.state.site.theme|replace(':', '/') }}/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ helper('core:config')('static', 'mount', '') }}/{{ ctx.state.site.theme|replace(':', '/') }}/bootstrap.min.css">
     {% else %}
-    <link rel="stylesheet" href="{{ config('static').mount }}/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ helper('core:config')('static', 'mount', '') }}/bootstrap/css/bootstrap.min.css">
     {% endif %}
     <title>{{ page.title|d(route.site.name) }}</title>
     {% block style %}
     {% endblock %}
-    {% if config('bootstrap').useCdn %}
+    {% if helper('core:config')('bootstrap', 'useCdn', false) %}
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     {% else %}
-    <script src="{{ config('static').mount }}/bootstrap/jquery/jquery.slim.min.js"></script>
-    <script src="{{ config('static').mount }}/bootstrap/popper.js/umd/popper.min.js"></script>
-    <script src="{{ config('static').mount }}/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ helper('core:config')('static', 'mount', '') }}/bootstrap/jquery/jquery.slim.min.js"></script>
+    <script src="{{ helper('core:config')('static', 'mount', '') }}/bootstrap/popper.js/umd/popper.min.js"></script>
+    <script src="{{ helper('core:config')('static', 'mount', '') }}/bootstrap/js/bootstrap.min.js"></script>
     {% endif %}
-    <script src="{{ config('static').mount }}/static/holderjs/holder.min.js"></script>
+    <script src="{{ helper('core:config')('static', 'mount', '') }}/static/holderjs/holder.min.js"></script>
     {% block script %}
     {% endblock %}
     <script>
@@ -32,16 +32,16 @@
   </head>
   <body>
     {% if not noNavbar %}
-    {% if config('bootstrap').navbar or not noNavbar %}
-    <div class="navbar navbar-expand-lg {{ config('bootstrap').navbar }}">
-      <div class="{% if config('bootstrap').fluidContainer %}container-fluid{% else %}container{% endif %}">
+    {% if helper('core:config')('bootstrap', 'navbar', '') or not noNavbar %}
+    <div class="navbar navbar-expand-lg {{ helper('core:config')('bootstrap', 'navbar', '') }}">
+      <div class="{% if helper('core:config')('bootstrap', 'fluidContainer', false) %}container-fluid{% else %}container{% endif %}">
         {% block navbar %}
         {% endblock %}
       </div>
     </div>
     {% endif %}
     {% endif %}
-    <div class="{% if config('bootstrap').fluidContainer %}container-fluid{% else %}container{% endif %}" id="main-container">
+    <div class="{% if helper('core:config')('bootstrap', 'fluidContainer', false) %}container-fluid{% else %}container{% endif %}" id="main-container">
       {% block content %}
       {% endblock %}
     </div>
